@@ -17,7 +17,7 @@ module Menu
 	end
 
 	def show_menu
-		menu
+		menu #method calls the other method with the menu
 	end
 
 end
@@ -61,8 +61,8 @@ class List
 	end
 
 	def write_to_file(filename) #outputs each of the tasks on a new line. You can use the write method in the IO class. 
-		machinified = @all_tasks.map(&:to_machine).join("\n") #string saved in a variable before passed to IO.write
-		IO.write(filename, machinified)		#The string outputs each task in all_tasks on a new line. to_mashine method to be used on each task we output.
+		machinified = @all_tasks.map(&:to_machine).join("\n") #string saved in a variable, all_task elements are converted to strings by to_machine; \n is new line
+		IO.write(filename, machinified)		#The string outputs each task in all_tasks on a new line. METHOD NAMES ARE SYMBOLS THEREFORE THE : AFTER &
 		#IO.write(filename, @all_tasks.map(&:to_s).join("\n")) / EARLIER VERSION BEFORE TASK STATUS WAS ADDED
 	end
 
@@ -93,20 +93,20 @@ class Task
 	end
 
 	def to_s
-		"#{description} #{represent_status} "
+		"#{represent_status}:#{description}"
 		#description / EARLIER VERSION
 	end	
 
 	def completed? #We now have a way to call the completed? method on a Task object to check its completed status.
-		completed_status
+		completed_status #returns the boolean
 	end
 	
 	def toggle_status #negate the completed? method, and set it to the new instance variable
-		@completed_status = !completed?
+		completed_status = !completed?
 	end
 
 	def to_machine #This method display both the represent_status method and the description, separated by a colon.
-		"#{represent_status} : #{description}"
+		"#{represent_status}:#{description}"
 	end
 
 
